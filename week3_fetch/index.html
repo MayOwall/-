@@ -8,15 +8,6 @@
 </head>
 <body>
   
-  <script>
-    const imgElement = document.createElement("img");
-    const IMG_URL = "https://imgnn.seoul.co.kr/img/upload/2012/02/20/SSI_20120220163350_V.jpg";
-
-    fetch("https://imgnn.seoul.co.kr/img/upload/2012/02/20/SSI_20120220163350_V.jpg")
-      .then(resolve => {
-        return resolve.blob();
-      })
-      .then(blob => console.log(blob));
-  </script>
+  <script src="./main.js" type="module"></script>
 </body>
 </html>
