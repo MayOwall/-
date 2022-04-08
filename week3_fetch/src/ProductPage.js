@@ -1,4 +1,5 @@
 import ProductOptions from "./ProductOption.js";
+import Cart from "./Cart.js";
 import { request } from "./api.js";
 
 export default function ProductPage({ target, initialState }) {
@@ -16,6 +17,17 @@ export default function ProductPage({ target, initialState }) {
     }
   });
 
+  const cart = new Cart({
+    target : productElement,
+    initialState: {
+      productName : "ㅇㅇㅇ",
+      basePrice : 10000,
+      selectedOptions: {}
+    },
+    onRemove : () => {
+
+    }
+  })
   this.setState = nextState => {
     if(nextState.productId !== this.state.productId) {
       FetchOptionData(nextState.productId);
@@ -23,6 +35,10 @@ export default function ProductPage({ target, initialState }) {
     };
     this.state = nextState;
     productOptions.setState(this.state.optionData);
+    // cart.setState({
+    //   basePrice : product.basePrice,
+    //   selectedProduct : this.state.selectedProduct
+    // });
   };
 
   this.render = () => {
@@ -68,12 +84,4 @@ export default function ProductPage({ target, initialState }) {
   };
   FetchOptionData(this.state.productId);
 
-  // const productOptionsComponent = new ProductOptions({
-  //   target : root,
-  //   initialState : [],
-  //   onSelect : (option) => {
-  //     alert(`${option.optionName}. 현재 재고는 ${option.stock}개 이소이다.`);
-  //   }
-  // });
-  
 };
