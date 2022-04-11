@@ -11,15 +11,17 @@ export default function App({ target }) {
     if(pathname === "/") {
       //pathname이 /이므로 홈페이지 랜더링 해 주기
       homePage.render();
-    } else if(pathname.indexOf("/products/") > 0) {
+    } else if(pathname.indexOf("/products/") > -1) {
       //pathname에 products가 포함되므로 productpage 랜더링
+      //url에서 productId 뽑기
+      const productId = pathname.split("/products/")[1];
     } else {
       //일단 404처리..!!
       target.innerHTML = `<h1>404 not Found..!!`;
     }
   };
 
-  this.init = () => {
+  this.init = () =>  {
     this.route();
   };
 
