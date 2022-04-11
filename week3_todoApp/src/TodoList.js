@@ -11,6 +11,12 @@ export default function TodoList({ target, initialState, onToggle, onRemove }) {
   };
 
   this.render = () => {
+    if(this.state.length === 0) {
+      todoListElement.innerHTML =  `
+        <h2>todo 가 없습니다!</h2>
+      `
+      return
+    };
     todoListElement.innerHTML = `
       <ul>
         ${this.state.map(({ _id, content, isCompleted }) =>  `
