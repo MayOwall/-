@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <a class="LinkItem" href="/product-list">product list</a>
+  <a class="LinkItem" href="/article-list">article list</a>
+
+  <script>
+    function route() {
+      const { pathname } = location;
+      const container = document.querySelector("#root");
+          if(pathname === "/") {
+            container.innerHTML = "<h1>HOme</h1>";
+          } else if (pathname === "/product-list") {
+            container.innerHTML = "<h1>상품 목록</h1>"
+          } else if (pathname === "/article-list") {
+            container.innerHTML = "<h1>아티클 목록</h1>"
+          };
+    }
+    console.log(route(), "reload is over");
+
+    window.addEventListener("click", e => {
+      if(e.target.className === "LinkItem") {
+        e.preventDefault();
+
+        const { href } = e.target;
+        const path = href.replace(window.location.origin, "");
+        console.log(path);
+        
+        history.pushState(null, null, path);
+        route();
+      }
+    })
+
+    window.addEventListener("popstate", e => route());
+  </script>
+</body>
+</html>
