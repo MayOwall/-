@@ -1,24 +1,23 @@
 export default function TodoForm({ target, onSubmit }) {
-  const formElement = document.createElement("form");
+  const todoFormElement = document.createElement("form");
 
-  target.appendChild(formElement);
+  target.appendChild(todoFormElement);
 
   this.render = () => {
-    formElement.innerHTML = `
-      <input type="text" placehoder="할일을 입력하세요">
-      <button>추가하기</button>
+    todoFormElement.innerHTML = `
+      <input type="text" placehodler="입력, 이곳에." />
+      <button>ADD</button>
     `
-  };
+  }
 
-  formElement.addEventListener("submit", (e) => {
+  todoFormElement.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    const inputElement = formElement.querySelector("input");
-    const content = inputElement.value;
-
+    const todoInputElement = todoFormElement.querySelector("input");
+    const content = todoInputElement.value;
+    
     onSubmit(content);
-    inputElement.value = ``;
-  });
+    todoInputElement.value = "";
+  })
 
   this.render();
 }
