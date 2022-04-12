@@ -1,5 +1,6 @@
 export default function PostList({ target, initialState, onPostClick }) {
   const postListElement = document.createElement("div");
+  postListElement.classList.add("post-list")
   target.appendChild(postListElement);
 
   this.state = initialState;
