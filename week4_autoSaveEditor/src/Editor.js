@@ -42,7 +42,7 @@ export default function Editor({
     const nameValue = target.getAttribute("name");
 
     //name과 state의 key value가 같을 경우에만 동작하도록 하는 방어코드
-    if(this.state[nameValue]) {
+    if(this.state[nameValue] !== undefined) {
       const nextState = {
         ...this.state,
         [nameValue]: target.value

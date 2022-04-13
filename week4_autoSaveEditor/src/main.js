@@ -15,14 +15,18 @@ const post = getItem(TEMP_POST_SAVE_KEY, {
   content : "재밌는 타이핑을 시작 해 볼까요~~"
 });
 
+let timer = null;
+
 new Editor({
   target : root,
   initialState : post,
   onEditing : (post) => {
-    setItem("temp-post", {
-      ...post,
-      //localstorage의 값이 저장된 시간과 서버 값이 저장된 시간을 비교하기 위한 파라미터
-      tempSaveDate: new Date()
-    }) 
+    timer = setTimeout(() => {
+      setItem(TEMP_POST_SAVE_KEY, {
+        ...post,
+        //localstorage의 값이 저장된 시간과 서버 값이 저장된 시간을 비교하기 위한 파라미터
+        tempSaveDate: new Date()
+      }) 
+    }, 500);
   }
 }); 
