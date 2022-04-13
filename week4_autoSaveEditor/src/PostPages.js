@@ -2,14 +2,14 @@ import PostList from "./PostList.js";
 import { request } from "./api.js";
 
 export default function PostPages({ target }) {
-  //postlist 불러오기
-  const postList = new PostList({
-    target,
-    initialState : []
-  });
   //postpage생성
   const postPagesElement = document.createElement("div");
   postPagesElement.classList.add("post-pages");
+  //postlist 불러오기
+  const postList = new PostList({
+    target : postPagesElement,
+    initialState : [],
+  });
   //new post를 위한 버튼 생성 & appendChild
   const newPostButtonElement = document.createElement("button");
   newPostButtonElement.innerText = "New Post";

@@ -6,7 +6,7 @@ export default function PostList({ target, initialState, onPostClick }) {
   this.state = initialState;
 
   this.setState = (nextState) => {
-    this.state = nextState;
+    this.state = nextState; 
     this.render();
   };
 
@@ -21,4 +21,17 @@ export default function PostList({ target, initialState, onPostClick }) {
   };
 
   this.render();
+
+  postListElement.addEventListener("click", (e) => {
+    const liElement = e.target.closest("li");
+
+    if(liElement) {
+      const { id } = liElement.dataset;
+      window.dispatchEvent(new Event("route-change", {
+        detail: {
+          id
+        }
+      }))
+    };
+  });
 };

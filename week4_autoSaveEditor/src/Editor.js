@@ -13,12 +13,17 @@ export default function Editor({
 
   target.appendChild(editorElement);
 
+  //초기화 여부
   let isInitialized = false;
 
   this.state = initialState;
 
+
   this.setState = (nextState) => {
     this.state = nextState;
+    editorElement.querySelector("[name=title]").value = this.state.title;
+    editorElement.querySelector("[name=content]").value = this.state.content;
+    //isinitialized 값 덕분에 내부 값만 바꾸고 form 자체는 다시 랜더링 되지 않음.
     this.render();
   }
 
@@ -29,6 +34,7 @@ export default function Editor({
         <input type="text" name="title" value="${this.state.title}" style="width:20rem" />
         <textarea name="content" style="display:block; width:20rem; height:10rem">${this.state.content}</textarea>
       `
+      //초기화 상태를 바꿔줌
       isInitialized = true;
     };
   };
@@ -47,6 +53,7 @@ export default function Editor({
         ...this.state,
         [nameValue]: target.value
       };
+      console.log(nextState);
 
       this.setState(nextState);
       onEditing(this.state);
