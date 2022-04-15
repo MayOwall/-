@@ -1,6 +1,7 @@
 import Editor from "./Editor.js";
 import { setItem, getItem, removeItem } from "./storage.js";
 import { request } from "./api.js";
+import LinkButton from "./LinkButton.js";
 
 export default function PostEditPage({ target, initialState }) {
   const postEditPageElement = document.createElement("div");
@@ -103,5 +104,10 @@ export default function PostEditPage({ target, initialState }) {
     }  
   };
 
+  new LinkButton({
+    text : "목록으로 이동",
+    link : "/"
+  });
+  
   fetchPost();
 }

@@ -1,5 +1,6 @@
 import PostPages from "./PostPages.js";
 import PostEditPage from "./PostEditPage.js";
+import { initRouter } from "./router.js";
 
 /*
 URL 규칙
@@ -45,7 +46,5 @@ export default function App({ target }) {
 
   this.route();
 
-  window.addEventListener("route-change", (e) => {
-    history.pushState(null, null, nextUrl);
-  });
+  initRouter(() => this.route());
 };

@@ -1,14 +1,14 @@
 import { push } from "./router.js";
 
-export default function PostList({ target, initialState, onPostClick }) {
+export default function PostList({ target, initialState }) {
   const postListElement = document.createElement("div");
-  postListElement.classList.add("post-list")
+  postListElement.classList.add("post-list");
   target.appendChild(postListElement);
 
   this.state = initialState;
 
   this.setState = (nextState) => {
-    this.state = nextState; 
+    this.state = nextState;
     this.render();
   };
 
@@ -24,12 +24,13 @@ export default function PostList({ target, initialState, onPostClick }) {
 
   this.render();
 
-  postListElement.addEventListener("click", (e) => {
-    const liElement = e.target.closest("li");
+  postListElement.addEventListener("click", (event) => {
+    const liElement = event.target.closest("li");
 
     if(liElement) {
       const { id } = liElement.dataset;
       push(`/posts/${id}`);
     };
   });
+
 };
