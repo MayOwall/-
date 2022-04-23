@@ -1,5 +1,6 @@
 export default function PhotoList({ target, initialState, onScrollEnded }) {
   const photoListElement = document.createElement("ul");
+  photoListElement.classList.add("PhotoList");
   
   target.appendChild(photoListElement);
 
@@ -12,14 +13,14 @@ export default function PhotoList({ target, initialState, onScrollEnded }) {
 
   this.render = () => {
     photoListElement.innerHTML = `
-      ${this.state.map(photo => {
+      ${this.state.map(photo => 
         `
           <li>
-            <img width ="15rem" src="${photo.imagePath}" />
+            <img width ="300" src="${photo.imagePath}" />
           </li>
         `
-      }).join("")}
-    `
+      ).join("")}
+    `;
   };
 
   this.render();
