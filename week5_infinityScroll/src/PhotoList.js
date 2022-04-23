@@ -11,35 +11,60 @@ export default function PhotoList({ target, initialState, onScrollEnded }) {
     this.render();
   };
 
+  const observer = new IntersectionObserver(entries => {
+     entries.forEach(entry => {
+       if(entry.isIntersecting) {
+         console.log("화면 끝 : ", entry);
+       }
+     })
+  }, {
+    root : null,
+    threshold : 0
+  })
+
   let isInitialized = false;
+  let lastPhotoElement = null;
 
   this.render = () => {
     if(!isInitialized) {
       photoListElement.innerHTML = `
         <ul class="PhotoList__ul" style="list-style:none;">
         </ul>
-        <button class="PhotoList__loadMore" style="width: 90vw; height: 3rem;">load more</button>
       `;
       isInitialized = true;
     };
 
-     const photoUl = document.querySelector(".PhotoList__ul");
+    const photoUl = document.querySelector(".PhotoList__ul");
+
     this.state.photos.forEach(photo => {
       const newPhoto = document.createElement("li");
       newPhoto.setAttribute("data-id", photo.id);
+      newPhoto.style.minHeight = "50px";
       newPhoto.innerHTML = `
         <img width="300" src="${photo.imagePath}" />
       `
       photoUl.appendChild(newPhoto);
     });
+
+    lastPhotoElement = photoUl.querySelector("li:last-child");
+    console.log(lastPhotoElement);
+
+    if(lastPhotoElement !== null) {
+      observer.observe(lastPhotoElement);
+    };
   };
 
   this.render();
 
-  photoListElement.addEventListener("click", (e) => {
-    console.log(this.state.isLoading);
-    if(e.target.classList.contains("PhotoList__loadMore") && !this.state.isLoading) {
+
+  window.addEventListener("scroll", () => {
+    const { isLoading, totalCount } = this.state;
+    const isScrollEnded = (window.innerHeight + window.scrollY) + 100 >= document.body.offsetHeight;
+    const isTotalLoaded = totalCount <= document.querySelectorAll(".PhotoList__ul li").length;
+    
+    if(isScrollEnded && !isLoading && !isTotalLoaded) {
       onScrollEnded();
-    };
-  });
+    }
+    
+  })
 };
