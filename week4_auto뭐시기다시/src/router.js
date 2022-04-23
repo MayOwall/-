@@ -11,7 +11,7 @@ export const initRouter = (onRoute) => {
     //nextUrl을 확인하는 조건문 방어코드
     if(nextUrl) {
       //window.history에 nextUrl을 pushState(로그 기록 쌓기)
-      history.pushState(null, null, nextUrl);
+      history.State(null, null, nextUrl);
       //인자로 받은 함수 onRoute 실행
       onRoute();
     }
