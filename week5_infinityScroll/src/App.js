@@ -30,26 +30,43 @@ export default function App({ target }) {
 
   this.state = {
     limit : 5,
-    start : 0,
-    photos : []
+    nextStart : 0,
+    photos : [],
+    isLoading : false
   };
 
   const photoListComponent = new PhotoList({
     target : appElement,
-    initialState : this.state.photos
+    initialState : {
+      isLoading : this.state.isLoading,
+      photos : this.state.photos
+    },
+    onScrollEnded : async () => {
+      await fetchPhotos(); 
+    }
   });
 
   this.setState = (nextState) => {
     this.state = nextState;
-    photoListComponent.setState(this.state.photos);
+    photoListComponent.setState({
+      isLoading : this.state.isLoading,
+      photos : this.state.photos
+    });
   };
 
   const fetchPhotos = async () => {
-    const photos = await request(`/cat-photos?_limit=5&start=0`);
+    this.state.isLoading = true;
+
+    const { limit, nextStart } = this.state;
+    const photos = await request(`/cat-photos?_limit=${limit}&_start=${nextStart}`);
+    
     this.setState({
       ...this.state,
-      photos
+      nextStart : nextStart + limit,
+      photos,
+      isLoading : false
     });
+
   };
 
   fetchPhotos();
