@@ -1,5 +1,25 @@
 export default function Loading({ target }){
   const loadingElement = document.createElement("div");
-  loadingElement.classList.add("");
+  loadingElement.classList.add("Loading");
+  loadingElement.classList.add("Modal");
+
+  target.appendChild(loadingElement);
+
   this.state = false;
+
+  this.setState = (nextState) => {
+    this.state = nextState;
+    this.render();
+  };
+
+  this.render = () => {
+loadingElement.style.display = this.state ? "block" : "none";
+
+loadingElement.innerHTML = `
+    <div class="content">
+      <img src="https://cdn.roto.codes/images/nyan-cat.gif" alt="Loading..." />
+    </div>
+`;
+
+  }
 }

@@ -1,17 +1,18 @@
 export default function Nodes({
   target,
   initialState,
-  onClick
+  onClick,
+  onPrevClick
 }) {
   const nodesElement = document.createElement("div");
   nodesElement.classList.add("nodes");
-
   target.appendChild(nodesElement);
  
   this.state = initialState;
 
-  this.setState = () => {
-
+  this.setState = (nextState) => {
+    this.state = nextState;
+    this.render();
     
   };
 
@@ -50,7 +51,7 @@ export default function Nodes({
     if(node) {
       onClick(node);
     } else {
-      alert("올바르지 않은 Node입니다.");
+      onPrevClick();
     }
   })
 }

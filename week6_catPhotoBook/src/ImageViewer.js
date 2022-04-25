@@ -26,4 +26,16 @@ export default function ImageViewer({ target, onClose }) {
   };
 
   this.render();
+
+  window.addEventListener("keyup", (e) => {
+    if(e.key === "Escape") {
+      onClose()
+    }
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target.classList.contains("Modal")) {
+      onClose()
+    }
+  })
 }
