@@ -47,7 +47,6 @@ export default function PhotoList({ target, initialState, onScrollEnded }) {
     });
 
     lastPhotoElement = photoUl.querySelector("li:last-child");
-    console.log(lastPhotoElement);
 
     if(lastPhotoElement !== null) {
       observer.observe(lastPhotoElement);
