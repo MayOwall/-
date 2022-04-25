@@ -6,8 +6,8 @@ export default function Nodes({
   const nodesElement = document.createElement("div");
   nodesElement.classList.add("nodes");
 
-  target.appendChild(nodeElement);
-
+  target.appendChild(nodesElement);
+ 
   this.state = initialState;
 
   this.setState = () => {
@@ -24,7 +24,7 @@ export default function Nodes({
         </div>
       `}
       ${nodes.map(node => `
-        <div class="Node">
+        <div class="Node" data-id="${node.id}">
         ${node.type === "DIRECTORY" 
         ? `<img src="https://cdn.roto.codes/images/directory.png">`
         : `<img src="https://cdn.roto.codes/images/folder.png">`}
@@ -35,4 +35,22 @@ export default function Nodes({
   };
 
   this.render();
+
+  nodesElement.addEventListener("click", (e) => {
+    const clickedNodeElement = e.target.closest(".Node");
+
+    const { id } = clickedNodeElement.dataset;
+    //뒤로가기를 눌렀을 경우
+    if(!id) {
+
+    }
+    
+    const node = this.state.nodes.find(node => node.id === id);
+
+    if(node) {
+      onClick(node);
+    } else {
+      alert("올바르지 않은 Node입니다.");
+    }
+  })
 }

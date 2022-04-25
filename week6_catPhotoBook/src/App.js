@@ -1,3 +1,4 @@
+import { request } from "./api.js";
 import Nodes from "./Nodes.js"
 const DUMMY_DATA = [{
  "id" : "1",
@@ -16,13 +17,43 @@ const DUMMY_DATA = [{
 ];
 
 export default function App({ target }){
+  this.state = {
+    isRoot : true,
+    nodes : []
+  };
+
   const nodes = new Nodes({
     target,
     initialState : {
-      isRoot : false,
-      nodes : DUMMY_DATA
+      isRoot : this.state.isRoot,
+      nodes : this.state.nodes
     },
-    onClick : () => {}
+    onClick : async (node) => {
+      if (node.type === "DIRECTORY") {
+        await fetchNodes(node.id);
+      }
+    }
   });
 
+  this.setState = (nextState) => {
+    this.state = nextState;
+
+    nodes.setState({
+      isRoot : this.state.isRoot,
+      nodes : this.state.nodes
+    })
+  };
+
+  const fetchNodes = async (id) => {
+    const nodes = await request(id ? `/${id}` : "/");
+    
+    this.setState({
+      ...this.state,
+      nodes,
+      isRoot: id ? false : true
+    });
+
+  };
+
+  fetchNodes();
 };
