@@ -1,4 +1,5 @@
 import { request } from "./api.js";
+import ImageViewer from "./ImageViewer.js";
 import Nodes from "./Nodes.js"
 const DUMMY_DATA = [{
  "id" : "1",
@@ -17,13 +18,17 @@ const DUMMY_DATA = [{
 ];
 
 export default function App({ target }){
+  const appElement = document.createElement("div");
+  appElement.classList.add("app");
+  target.appendChild(appElement);
+
   this.state = {
     isRoot : true,
     nodes : []
   };
 
   const nodes = new Nodes({
-    target,
+    target : appElement,
     initialState : {
       isRoot : this.state.isRoot,
       nodes : this.state.nodes
@@ -34,6 +39,10 @@ export default function App({ target }){
       }
     }
   });
+
+  const imageViewer = new ImageViewer({
+    target : appElement,
+  })
 
   this.setState = (nextState) => {
     this.state = nextState;

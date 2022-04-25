@@ -1,9 +1,11 @@
-export default function ImageViewer({ target }) {
+export default function ImageViewer({ target, onClose }) {
   const imageViewerElement = document.createElement("div");
   imageViewerElement.classList.add("ImageViewer");
+  imageViewerElement.classList.add("Modal");
+  target.appendChild(imageViewerElement);
 
   this.state = {
-    imageUrl : null
+    selectedImageUrl : null
   };
 
   this.setState = nextState => {
@@ -12,12 +14,12 @@ export default function ImageViewer({ target }) {
   };
 
   this.render = () => {
-    if (this.state.imageUrl) {
-      imageViewerElement.style.display = this.state.imageUrl ? "block" : "none";
+    if (this.state.selectedImageUrl) {
+      imageViewerElement.style.display = this.state.selectedImageUrl ? "block" : "none";
 
       imageViewerElement.innerHTML = `
         <div class="content">
-          <img src="${this.state.imageUrl}" />
+          <img src="${this.state.selectedImageUrl}" />
         </div>
       `;
     };
