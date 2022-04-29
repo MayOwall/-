@@ -1,37 +1,41 @@
-export default function Nodes({
-  target,
-  initialState,
-  onClick,
-  onPrevClick
-}) {
+export default function Nodes({ target, initialState, onClick, onPrevClick }) {
   const nodesElement = document.createElement("div");
   nodesElement.classList.add("nodes");
   target.appendChild(nodesElement);
- 
+
   this.state = initialState;
 
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
-    
   };
 
   this.render = () => {
     const { isRoot, nodes } = this.state;
     nodesElement.innerHTML = `
-      ${isRoot ? `` : `
+      ${
+        isRoot
+          ? ``
+          : `
         <div class="Node">
           <img src="https://cdn.roto.codes/images/prev.png" />
         </div>
-      `}
-      ${nodes.map(node => `
+      `
+      }
+      ${nodes
+        .map(
+          (node) => `
         <div class="Node" data-id="${node.id}">
-        ${node.type === "DIRECTORY" 
-        ? `<img src="https://cdn.roto.codes/images/directory.png">`
-        : `<img src="https://cdn.roto.codes/images/folder.png">`}
+        ${
+          node.type === "DIRECTORY"
+            ? `<img src="https://cdn.roto.codes/images/directory.png">`
+            : `<img src="https://cdn.roto.codes/images/file.png">`
+        }
         ${node.name}
         </div>
-      `).join("")}
+      `
+        )
+        .join("")}
     `;
   };
 
@@ -42,16 +46,15 @@ export default function Nodes({
 
     const { id } = clickedNodeElement.dataset;
     //뒤로가기를 눌렀을 경우
-    if(!id) {
-
+    if (!id) {
     }
-    
-    const node = this.state.nodes.find(node => node.id === id);
 
-    if(node) {
+    const node = this.state.nodes.find((node) => node.id === id);
+
+    if (node) {
       onClick(node);
     } else {
       onPrevClick();
     }
-  })
+  });
 }
