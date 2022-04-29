@@ -1,0 +1,14 @@
+div {
+  margin: 1rem;
+  width: 10rem;
+  height: 10rem;
+  background-color: darkolivegreen;
+  color: white;
+  font-size: 2rem;
+
+  display: inline;
+}
+
+.float {
+  float: left;
+}
