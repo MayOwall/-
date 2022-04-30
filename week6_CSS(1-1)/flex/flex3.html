@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flex3, flex items</title>
+    <style>
+      .container {
+        border: 4px solid;
+        display: flex;
+      }
+      .container .item {
+        width: 100px;
+        height: 100px;
+        background-color: orange;
+        font-size: 40px;
+        border: 2px solid;
+        flex-grow: 1;
+        flex-basis: 0;
+        /* flex: grow shrink basis;*/
+      }
+      .container .item:nth-child(2) {
+        flex-grow: 2;
+        flex-shrink: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      #flex item에 부여되는 여러 속성 알아보기
+
+      flex-grow : flex item의 증가 넓이 비율을 설정
+       - 0 (기본값, 증가되는 값이 없음을 의미)
+       - 숫자 별 비율에 따라 flex item 넓이의 비율이 결정됨.
+       - 이미 지정되어 있는 height값 등에 따라 넓이에 영향을 받게 됨.
+
+      flex-shrink : flex item의 감소 넓이 비율을 설정
+      - 1 (기본값)
+      - 0 (item의 넓이가 줄어드는 것을 방지할 수 있게 됨)
+
+      flex-basis : 요소의 기본 넓이를 설정
+      - auto (기본값)
+      - px값으로 지정하는 순간, width, height을 사용할 수 없게 됨.
+
+      flex : flex-grow, flex-shrink, flex-basis 단축속성
+      - 일부 값을 임의로 삭제하면 실제로 명시했을때와는 다름.
+      - basis 값이 생략했을 땐 기본값이 아닌 0이 할당되기 때문.
+      - 따라서 강사님은 flex 단축속성은 잘 사용하지 않는 편이다.
+
+      order : flex item의 순서를 지정해 줌
+      - 0 (기본값)
+      - 숫자가 높아질수록 순서가 뒤로 밀리게 됨.
+      - 음수도 사용 가능함.
+
+      align-self : 지정한 item의 align값을 개별적으로 관리할 수 있는 값
+      - align-items의 상속개념
+      - align-items에서 사용 가능한 값을 동일하게 사용 가능
+
+
+      # 또다시 돌아온 flex container에 적용 가능한 속성
+      gap : flex-item간의 거리를 설정
+      - 아주 최신의 기술 => 동작하지 않는 브라우저가 많다.
+      - 아직 실무에서 사용되기까지는 약간의 시간이 필요할 예정
+      cf. 브라우저에서 사용 가능한 기능을 확인하기 위해 caniuse라는 사이트를 이용하면 좋다.
+
+      여백을 줄 수 있는 방법들
+      1. margin-left / right
+      - 불필요한 여백이 생기게 되는데, 이때 가상 클래스로 마지막 item은 margin을 없애주면 된다.
+
+    -->
+    <div class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </body>
+</html>
