@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Items 2</title>
+    <style>
+      .container {
+        width: 400px;
+        height: 400px;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: end;
+        align-items: end;
+      }
+      .container .item {
+        width: 100px;
+        height: 100px;
+        border: 2px solid;
+        background-color: orange;
+      }
+      .container .item:nth-child(1) {
+        justify-self: center;
+      }
+      .container .item:nth-child(3) {
+        order: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      #grid item들에 개별적으로 적용할 수 있는 속성들 
+      justify-self
+      - normal
+      - start
+      - center
+      - end
+
+      align-self
+      - normal
+      - start
+      - center
+      - end
+
+      #grid item들의 순서를 바꿔 줄 수 있는 속성
+      order
+      - 기본 값인 0에서 시작
+      - 숫자가 작을수록 순서가 앞으로, 숫자가 클수록 순서가 뒤로 밀림.
+      - 음수 값도 사용 가능.
+
+      # item을 겹치게 만들어 주기 위해서는 grid-row, grid-column을 각기 정확히 명시 해 줘야 한다.
+
+      # 가장 마지막에 쌓인 요소가 가장 위로 올라오게 되는데,
+      이를 임의로 바꿔주기 위해선 z-index 속성을 사용할 수 있다.
+
+      
+    -->
+    <div class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+    </div>
+  </body>
+</html>
