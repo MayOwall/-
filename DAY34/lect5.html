@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY34_lec(5): 템플릿 문법</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style>
+      .active {
+        color: darkolivegreen;
+      }
+    </style>
+    <div id="app">
+      <h1>{{ msg }}</h1>
+      <!--v-once는 감시하는 요소를 줄이는 만큼 메모리를 덜 사용하게 됨-->
+      <h2 v-once>{{ msg }}</h2>
+      <!--XSS 취약점이 있으므로, 주의할 것!
+      xss npm을 통하여 보안취약점을 해결할 수 있다.-->
+      <div v-html="rawHTML"></div>
+      <h1 v-bind:class="name">Hello, V-bind!</h1>
+      <input type="text" value="Hello Vue!" v-bind:disabled="disabled" />
+      <h1>count : {{ count + 2 }}</h1>
+      <!--v-bind가 붙은 모든 속성은 인자로 취급되기 때문에, 문자열을 사용해야 한다면 따옴표로 한번 감싸는 것을 잊지 말아야 한다.
+      v-bind의 약어 = :
+      v-on의 약어 = @-->
+      <h1 v-bind:[attr]="'active'">동적인자 {{ attr }}</h1>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            msg: "Hello Vue!",
+            rawHTML: "<h3 style='color:red;'>Raw HTML?!</h3>",
+            name: "active",
+            disabled: true,
+            count: 0,
+            attr: "class",
+          };
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
