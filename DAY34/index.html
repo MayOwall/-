@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style>
+      .orange {
+        color: orange;
+      }
+    </style>
+    <div id="app">
+      {{ counter }}
+      <div v-bind:class="{ orange : active }">{{ counter }}</div>
+      <button v-on:click="increase">Click me!</button>
+    </div>
+    <script>
+      //반응성 : 데이터가 바뀌면 화면이 바로바로 반영되는 것
+      //반응형 데이터 : 반응성을 가진 데이터
+      const App = {
+        //vue.js의 옵션들
+        data() {
+          return {
+            counter: 0,
+            active: true,
+          };
+        },
+        methods: {
+          increase() {
+            this.counter += 1;
+          },
+        },
+        mounted() {
+          //this키워드로 인해 반드시 화살표함수로 해줄 것
+          // setInterval(() => {
+          //   this.counter += 1;
+          // }, 1000);
+        },
+      };
+
+      const app = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
