@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY34_lec(4): 라이프 사이클</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ message }}</h1>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            message: "Hello Lifecycle!",
+          };
+        },
+        //lifecycle을 필요한 상황에 맞추어 쓸 수 있는 판단이 필요하다.
+        //beforecreate lifecycle
+        //app이 생성되기 전에 동작해야 할 동작들
+        //사실상 거의 사용되지 않는 lifecycle이다.
+        beforeCreate() {
+          console.log(
+            "beforeCreate",
+            this.message || "there is no this.message"
+          );
+          console.log(document.querySelector("h1") || "there is no h1");
+        },
+        //created lifecycle
+        //가장 많이 사용하게될 lifecycle중 하나
+        //아직 DOM과 연결된 상황은 아니기 때문에, 이 cycle에선 DOM을 제어할 수 없음을 유의해야 한다.
+        created() {
+          console.log("created!", this.message || "there is no this.message");
+          console.log(document.querySelector("h1") || "there is no h1");
+        },
+        //beforemount lifecycle
+        beforeMount() {
+          console.log(
+            "before mount!",
+            this.message || "there is no this.message"
+          );
+          console.log(document.querySelector("h1") || "there is no h1");
+        },
+        //mounted lifecycle
+        //가장 많이 사용하게될 lifecycle중 하나
+        //실질적으로 DOM과 연결된 상황.
+        //DOM요소에 접근하여 제어하기 위해선 반드시 mounted된 상황에서 명령해야 한다.
+        mounted() {
+          console.log("mounted!", this.message || "there is no this.message");
+          console.log(document.querySelector("h1") || "there is no h1");
+        },
+        //beforeUpdate lifestyle
+        //화면이 업데이트 되기 전의 상태. 즉 DOM이 업데이트 되기 전의 상태.
+        //데이터가 업데이트 된 상황이랑은 다른 의미이다.
+        beforeUpdate() {
+          console.log("before update", this.message);
+          console.log(document.querySelector("h1").textContent);
+        },
+        //updated lifecycle
+        //화면이 업데이트 되고 난 후의 상태
+        updated() {
+          console.log("updated!", this.message);
+          console.log(document.querySelector("h1").textContent);
+        },
+        //beforeUnmount lifecycle
+        beforeUnmount() {
+          console.log("before unmount!");
+        },
+        //unmounted lifecycle
+        unmounted() {
+          console.log("mounted!");
+        },
+      };
+      const app = Vue.createApp(App);
+      const viewModel = app.mount("#app");
+    </script>
+  </body>
+</html>
