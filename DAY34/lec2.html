@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!--디렉티브-->
+      <div v-if="active">Hello Vue!</div>
+      <button v-on:click="toggle">Toggle</button>
+
+      <ul>
+        <!--v-for : 반복이 가능한 데이터를 반복적으로 행동할 수 있도록 해 줌.
+        fruit : 반복될 객체의 변수-->
+        <li v-for="fruit in fruits">{{ fruit }}</li>
+      </ul>
+      <ul>
+        <!--script에서 pascalCase는 html에서 snake-case로 자동 변환된다-->
+        <fruit-item
+          v-for="fruit in fruits"
+          v-bind:fruit-name="fruit"
+        ></fruit-item>
+      </ul>
+    </div>
+
+    <script>
+      // vue 컴포넌트
+      const FruitItem = {
+        template: "<li>{{ fruitName }}</li>",
+        props: ["fruitName"],
+      };
+      const App = {
+        components: {
+          FruitItem,
+        },
+        data() {
+          return {
+            active: false,
+            fruits: ["Apple", "Banana", "Cherry"],
+          };
+        },
+        methods: {
+          toggle() {
+            this.active = !this.active;
+          },
+        },
+      };
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
