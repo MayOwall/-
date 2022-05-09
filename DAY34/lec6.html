@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY34_lec(6): Data와 Methods</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ count }}</h1>
+      <!--//나중에 추가되는 데이터는 반응성을 가지고 있진 않는다.
+            //$data안에도 추가되지 않는다.-->
+      <h2>{{ double }}</h2>
+    </div>
+    <script>
+      //App = 컴포넌트 => "재사용 가능"
+      const App = {
+        //data는 화살표 함수가 아닌 일반 함수
+        //재사용성을 위해 data는 함수형으로 제작된다.
+        data() {
+          return {
+            count: 0,
+          };
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+
+      const proxyA = new Proxy(App.data(), {
+        //getter와 setter를 설정하면 데이터 변화 캐치와 동시에 다른 이벤트를 설정할 수 있게 된다.
+        //getter
+        //target : 첫번째 매개변수.
+        get(target, key) {
+          console.log("A Getter!", target, key);
+          return target[key];
+        },
+        //setter
+        set(target, key, value) {
+          target[key] = value * 2;
+          console.log("A Setter!", target, key, value);
+        },
+      });
+      const proxyB = new Proxy(App.data(), {
+        //getter와 setter를 설정하면 데이터 변화 캐치와 동시에 다른 이벤트를 설정할 수 있게 된다.
+        //getter
+        //target : 첫번째 매개변수.
+        get(target, key) {
+          console.log("B Getter!", target, key);
+          return target[key];
+        },
+        //setter
+        set(target, key, value) {
+          target[key] = value * 4;
+          console.log("B Setter!", target, key, value);
+        },
+      });
+    </script>
+  </body>
+</html>
