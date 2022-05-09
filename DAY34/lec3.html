@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY34_lec3: 애플리케이션과 인스턴스 생성</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">{{ message }}</div>
+    <script>
+      const app = Vue.createApp({
+        //Vue.js의 app내부에서 사용할 data들을 정의해 주는 메서드.
+        //return을 통해 사용할 data들을 객체 형태로 내보내 주면 된다.
+        data() {
+          return {
+            message: "Hello, Vue!",
+          };
+        },
+      });
+      //mount : html의 특정 요소에 연결 해 주는 역할.
+      //mount의 인자는 선택자 문법을 사용하여 작성하면 된다. 되도록이면 중복 방지를 위해 id값을 가진 요소를 사용하는 것을 추천.
+      //viewModel : mount를 통해 연결된 요소에 대한 제어권을 가진 인스턴스.
+      //통상적으로 vm이라는 변수명으로 사용된다.
+      const viewModel = app.mount("#app");
+      viewModel.message = "Hello, viewModel!";
+    </script>
+  </body>
+</html>
