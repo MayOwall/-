@@ -6,7 +6,7 @@
 
 <br>
 
-### __methods와 computed__
+### **methods와 computed**
 
 <br>
 
@@ -49,7 +49,7 @@ computed는 methods에 비해 함수 실행 자체는 최초 한번만 이루어
 <br>
 <br>
 
-### __JSON placeholder__
+### **JSON placeholder**
 
 <br>
 
@@ -67,7 +67,7 @@ https://jsonplaceholder.typicode.com/
 <br>
 <br>
 
-### __created__
+### **created**
 
 컴포넌트가 생성되고 DOM과 mount되기전을 시간대로 갖는 lifecycle
 
@@ -90,7 +90,7 @@ created() {
 <br>
 <br>
 
-### __computed를 통해 API 데이터 바꾸기__
+### **computed를 통해 API 데이터 바꾸기**
 
 API는 FE에서 뿐만 아니라 어딘가에서도 범용적으로 사용될 가능성이 높기 때문에,<br>
 API에 대한 변환이 필요할 때는<br>
@@ -117,7 +117,7 @@ upperTodos() {
 <br>
 <br>
 
-### __computed내부 값의 의존성__
+### **computed내부 값의 의존성**
 
 <br>
 
@@ -154,7 +154,7 @@ doubleAge() {
 <br>
 <br>
 
-### __computed의 불변성__
+### **computed의 불변성**
 
 <br>
 
@@ -206,11 +206,13 @@ fullName: {
 
 <br>
 
-### __watch__
+### **watch**
 
 데이터에 변경사항을 감시하는 역할<br>
 반응형 데이터에서만 사용할 수 있다.<br>
 변경사항을 감시할 데이터와 같은 이름의 함수를 만들어주어 사용할 수 있다.
+
+> watch는 함수가 아닌 객체형태이다
 
 ```js
 watch: {
@@ -219,8 +221,8 @@ watch: {
           },
         },
 ```
-<br>
 
+<br>
 
 watch에서 선언된 함수들은 2개의 매개변수를 가진다.
 첫번째 매개변수는 새로이 바뀐 값, 두번째 매개변수는 기존의 값을 나타낸다.
@@ -231,4 +233,58 @@ watch: {
             console.log("watch", newValue, oldValue);
           },
         },
+```
+
+<br>
+
+data 중 데이터타입이 참조형인 데이터들(객체, 배열 등)은 <br>
+데이터의 속성을 통해 데이터 값을 바꿀 땐 watch가 정상적으로 동작하지 않는다.
+
+```js
+data() {
+          return {
+            user: {
+              name: "Owall",
+              age: 22,
+            },
+          };
+        },
+watch: {
+          user(newValue, oldValue) {
+            console.log(newValue, oldValue); //작동 X
+          },
+        },
+```
+
+<br>
+
+이같은 참조형 데이터들을 깊게 watch하기 위해서<br>
+handler와 deep이라는 옵션을 사용할 수 있다.
+
+```js
+watch: {
+          user: {
+            //handler라는 식별자명은 바꿔선 안된다.
+            handler(newValue, oldValue) {
+              console.log(newValue, oldValue);
+            },
+            //깊은 감시를 위한 옵션, true를 통한 활성화
+            deep: true,
+          },
+        },
+```
+
+<br>
+
+immediate라는 옵션을 통해<br>
+데이터 변경 뿐만 아니라, 데이터 초기화 상황도 감지할 수 있게 된다.
+
+```js
+fruits: {
+            hander() {
+              console.log(this.fruits);
+            },
+            deep: true,
+            immediate: true,
+          },
 ```
