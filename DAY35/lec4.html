@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY35_lec(4): 클래스와 스타일 바인딩 (1)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style>
+      .title {
+        font-size: 30px;
+        color: royalblue;
+      }
+      .active {
+        color: rebeccapurple;
+      }
+      .title--small {
+        font-size: 20px;
+      }
+      .color--orange {
+        color: orange;
+      }
+    </style>
+    <div id="app">
+      <button @click="toggle">Toggle</button>
+      <h3 :class="isActive ? 'active' : ''" class="title">{{ msg }}</h3>
+      <h3 :class="styleObject" class="title">{{ msg }}</h3>
+      <h1 :class="[`active`, `title`]" @click="changeTitle">
+        Hello another view
+      </h1>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            msg: "Hello, message!",
+            isActive: false,
+            small: true,
+            active: "active",
+            title: "title",
+          };
+        },
+        computed: {
+          styleObject() {
+            return {
+              active: this.isActive,
+              "title__small color--orange": this.small,
+            };
+          },
+        },
+        methods: {
+          toggle() {
+            this.isActive = !this.isActive;
+            this.small = !this.small;
+          },
+          changeTitle() {
+            this.title = `title--large`;
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

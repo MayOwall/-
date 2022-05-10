@@ -288,3 +288,114 @@ fruits: {
             immediate: true,
           },
 ```
+
+<br>
+<br>
+<br>
+
+---
+
+<br>
+
+# Class
+
+vue에선 data()와 methods를 통해 아래와같이 class명을 제어할 수 있다.
+
+```html
+<h1 :class="isActive ? 'active' : ''" class="title">{{ msg }}</h1>
+```
+
+```js
+const App = {
+  data() {
+    return {
+      msg: "Hello, message!",
+      isActive: false,
+    };
+  },
+  methods: {
+    toggle() {
+      this.isActive = !this.isActive;
+    },
+  },
+};
+```
+
+<br>
+
+class 2가지 이상을 다루고 싶을 땐 객체리터럴 방식을 사용하면 된다.
+
+```html
+<h1 :class="{ active : isActive, small: isSmall }" class="title">{{ msg }}</h1>
+```
+
+```js
+data() {
+          return {
+            msg: "Hello, message!",
+            isActive: false,
+            isSmall : true
+          };
+```
+
+<br>
+
+class명과 data이름이 같으면 생략할 수 있다.
+
+```html
+<h1 :class="{ active, small}" class="title">{{ msg }}</h1>
+```
+
+```js
+data() {
+          return {
+            msg: "Hello, message!",
+            active: false,
+            small : true
+          };
+```
+
+<br>
+
+class 이름에 특수기호가 들어가 있다면(가상 선택자 등) class이름을 `''`로 감싸서 해결할 수 있다.
+
+```html
+<h1 :class="{ active, 'title--small` : small}" class="title">{{ msg }}</h1>
+```
+
+<br>
+
+`''`를 사용하여 class명을 2개 이상 한꺼번에 추가할 수 있다.
+
+```html
+<h1 :class="{ active, 'title--small color--orange` : small}" class="title">
+  {{ msg }}
+</h1>
+```
+
+<br>
+
+다수의 로직이 들어간 class는 한꺼번에 computed값으로 나타낼 수 있다.
+
+```html
+<h1 :class="styleObject" class="title">{{ msg }}</h1>
+```
+
+```js
+computed: {
+          styleObject() {
+            return {
+              active: this.isActive,
+              "title__small color--orange": this.small,
+            };
+          },
+        },
+```
+
+<br>
+
+배열 데이터를 통해 class명을 정해줄 수 있다.
+
+```html
+<h1 :class="[`active`, `title`]">Hello another view</h1>
+```
