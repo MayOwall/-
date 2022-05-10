@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY35_lec(1): Computed와 Watch (1)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ count }}</h1>
+      <h2>{{ double }}</h2>
+      <h2>{{ double }}</h2>
+
+      <h1>{{ user.name }}</h1>
+      <h2>{{ upperName }}</h2>
+      <h2>age {{ user.age }}</h2>
+      <h2>double age {{ doubleAge }}</h2>
+      <ul>
+        <li v-for="todo in upperTodos">{{ todo.title }}</li>
+      </ul>
+    </div>
+
+    <script>
+      const App = {
+        data() {
+          return {
+            count: 0,
+            todos: [],
+            user: {
+              name: "Owall",
+              age: 25,
+              email: "naver@naver.com",
+            },
+          };
+        },
+        created() {
+          fetch("https://jsonplaceholder.typicode.com/todos")
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+              this.todos = res;
+            });
+        },
+        computed: {
+          double() {
+            return this.count * 2;
+          },
+          upperTodos() {
+            //궁금증 : vue에서는 validation은 필요 없나염?
+            return this.todos.map((todo) => ({
+              ...todo,
+              title: todo.title.toUpperCase(),
+            }));
+          },
+          doubleAge() {
+            console.log("Doubled!");
+            return this.user.age * 2;
+          },
+          upperName() {
+            return this.user.name.toUpperCase();
+          },
+        },
+      };
+
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
