@@ -399,3 +399,14 @@ computed: {
 ```html
 <h1 :class="[`active`, `title`]">Hello another view</h1>
 ```
+
+<br>
+
+배열 데이터는 class뿐만 아니라 style객체를 여러개 정해주는 데에도 사용할 수 있다.
+
+```html
+<h1
+  :style="[styleObject, titleStyleObject]"
+  @click="toBlue(); increaseWidth()"
+></h1>
+```

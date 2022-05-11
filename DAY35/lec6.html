@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY35_lec(5): 클래스와 스타일 바인딩 (2)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style>
+      h1 {
+        border: 2px solid;
+      }
+    </style>
+    <div id="app">
+      <h1
+        :style="[styleObject, titleStyleObject]"
+        @click="toBlue(); increaseWidth()"
+      >
+        Hello vue
+      </h1>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            color: "red",
+            width: 200,
+            backgroundColor: "orange",
+          };
+        },
+        computed: {
+          styleObject() {
+            return {
+              color: this.color,
+              width: `${this.width}px`,
+            };
+          },
+        },
+        methods: {
+          toBlue() {
+            this.color = "royalblue";
+          },
+          increaseWidth() {
+            this.width += 20;
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
