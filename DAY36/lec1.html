@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY36_lec(1): 조건부 렌더링</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 v-if="isShow">Hello if</h1>
+      <template v-else-if="[]">
+        <h2>Hello elseIf 1</h2>
+        <h2>Hello elseIf 2</h2>
+      </template>
+      <h2 v-else>Hello else</h2>
+      <button @click="toggle">button</button>
+      <h1 v-show="isShow2">{{ msg }}</h1>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            msg: "Hello msg",
+            isShow: 0,
+            isShow2: true,
+          };
+        },
+        methods: {
+          toggle() {
+            this.isShow2 = !this.isShow2;
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
