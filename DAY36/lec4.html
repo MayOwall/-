@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY36_lec(4): 이벤트 핸들링 (1)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style>
+      a {
+        display: block;
+      }
+      .parent {
+        width: 200px;
+        height: 100px;
+        background-color: royalblue;
+        padding: 20px;
+      }
+      .child {
+        width: 100px;
+        height: 50px;
+        background-color: olivedrab;
+      }
+    </style>
+    <!--이벤트 핸들링-->
+    <div id="app">
+      <!--이벤트핸들러를 통해 method를 연결할 수 있다.-->
+      <h2 @click="say">{{ msg }}</h2>
+      <!--method를 즉시실행함수로 적었을 때, $기호를 통해 인자로 함수를 추가할 수 있다.-->
+      <h2 @click="say(`hello~`, $event)">{{ msg }}</h2>
+      <!--쉼표를 통해 method를 여러개 나열 할 수 있다. (vue2에서는 ;사용)-->
+      <h2 @click="a(), b(), c()">title for ABC</h2>
+      <!--이벤트 수식어 : prevent, @click.prevent를 통해 이벤트 기본동작을 방지할 수 있다.-->
+      <a href="https://google.com" target="_blank" @click.prevent
+        >이벤트 수식어 : prevent</a
+      >
+      <!--이벤트 수식어 : once, 연결된 이벤트 수식어와 method를 한번만 실행한다.-->
+      <a href="https://google.com" target="_blank" @click.prevent.once="a"
+        >이벤트 수식어 : once</a
+      >
+      <!--이벤트 수식어 : capture, 이벤트 캡쳐링을 강제한다.-->
+      <div class="parent" @click.capture ="log">
+        <!--이벤트 수식어 : stop, 이벤트 버블링을 막아준다.-->
+        <div class="child" @click.stop="log"></div>
+        <!--이벤트 수식어 : self, currentTarget과 target이 같을때만 method를 실행한다.-->
+        <div class="child" @click.self="log"></div>
+      </div>
+    </div>
+    <script>
+      //JS에서 이벤트 기본동작 방지하는 코드. @click.prevent에 비해 비효율적이다.
+      // window.addEventListener("load", () => {
+      //   const aElement = document.querySelector("a");
+      //   aElement.addEventListener("click", (event) => {
+      //     event.preventDefault();
+      //   });
+      // });
+      const App = {
+        data() {
+          return {
+            msg: "Hello event handler",
+          };
+        },
+        methods: {
+          say(message, event) {
+            console.log(message);
+            console.log(event.target);
+          },
+          a() {
+            console.log("A");
+          },
+          b() {
+            console.log("B");
+          },
+          c() {
+            console.log("C");
+          },
+          log(event) {
+            console.log(event.currentTarget);
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
