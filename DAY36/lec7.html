@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY36_lec(7): 폼 입력 바인딩 (2)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style></style>
+    <div id="app">
+      <select v-model="selectedFruit">
+        <option disabled>하나를 선택하세요</option>
+        <option v-for="fruit in fruits" :key="fruit.value" :value="fruit.value">
+          {{ fruit.name }}
+        </option>
+        <!-- <option value="apple">사과</option>
+        <option value="banana">바나나</option>
+        <option value="cherry">체리</option> -->
+      </select>
+      <!--v-model 이벤트 수식어 : lazy, 실시간이 아닌 이벤트 change가 있을때만 data를 업데이트 한다.-->
+      <input v-model.lazy="msg" type="text">
+      <!--v-model 이벤트 수식어 : number, string타입의 숫자 data를 number 타입으로 변환 해 준다.-->
+      <input v-model.number="msg" type="text">
+      <!--v-model 이벤트 수식어 : trim, data의 앞 뒤 공백을 제거 해 준다.-->
+      <input v-model.trim="msg" type="text">
+      <h2>{{ msg }}</h2>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            selectedFruit: "",
+            fruits: [
+              { name: "사과", value: "apple" },
+              { name: "바나나", value: "banana" },
+              { name: "체리", value: "cherry" },
+            ],
+            msg: "hello this is msg"
+          };
+        },
+        watch: {
+          selectedFruit(newValue) {
+            console.log(newValue);
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
