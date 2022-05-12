@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY36_lec(5): 이벤트 핸들링 (2)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style>
+      .parent {
+        width: 200px;
+        height: 100px;
+        border: 2px solid;
+        overflow: auto;
+      }
+      .child {
+        font-size: 50px;
+      }
+      input {
+        margin: 1rem 0;
+        display: block;
+      }
+    </style>
+    <div id="app">
+      <div class="parent">
+        <!--이벤트수식어 : passive, 화면에서의 동작과 메서드 연산을 분리하여, 화면에서의 동작이 보다 부드러울 수 있게 해 준다.-->
+        <div class="child" v-for="n in 15" @wheel.passive="log">{{ n }}</div>
+      </div>
+      <!--key 이벤트 수식어 : snake-case를 이용한 키를 추가하여 이벤트가 동작할 키를 제한할 수 있다-->
+      <input @keyup.arrow-down="log2" type="text" />
+      <!--key 이벤트 수식어 : exact, 앞선 key만! 클릭 되었을때 이벤트가 동작할 수 있도록 제한한다.-->
+      <input @keyup.arrow-down.exact="log2" type="text" />
+      <!--key 이벤트 수식어 체이닝을 통해 2가지 이상의 조건을 만들 수 있다.-->
+      <input @keyup.alt.arrow-down="log2" type="text" />
+      <!--meta 이벤트 수식어는 keydown에서만 사용 가능하다.-->
+      <input @keydown.meta="log2" type="text" />
+
+      <!--exact 이벤트 수식어는 key이벤트 외의 이벤트에서도 사용 가능하다.-->
+      <button @click.alt.exact="log2">button</button>
+      <!--마우스 이벤트로는 left, middle, right가 있다-->
+      <button @click.left.middle.right="log2">button2</button>
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {};
+        },
+        methods: {
+          log() {
+            for (let i = 0; i < 1000; i++) {
+              console.log(i);
+            }
+          },
+          log2(e) {
+            console.log(e);
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
