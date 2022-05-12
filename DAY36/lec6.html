@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAY36_lec(6): 폼 입력 바인딩 (1)</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <style>
+      input {
+        display: block;
+      }
+    </style>
+    <div id="app">
+      <h2>{{ msg }}</h2>
+      <!--양방향 데이터 바인딩-->
+      <input type="text" :value="msg" @input="msg = $event.target.value" />
+      <!--v-model 디렉티브를 통해 양방향 데이터 바인딩을 쉽게 구성할 수 있다 
+        (일종의 syntax sugar, 한글은 제대로 적용이 되지 않으니 주의.)-->
+      <input type="text" v-model="msg" />
+      <!--v-model 디렉티브는 속성값(checked)보다 우선된다-->
+      <input type="checkbox" checked v-model="checked" />
+      <textarea v-model="msg2" @change="log"></textarea>
+      <div>{{ msg2 }}</div>
+      <input v-model="checked2" type="checkbox" />
+      <!--checkbox의 data를 array로 만듦으로써 다중 checkbox값을 다룰 수 있다.-->
+      <input v-model="checked3" value="checkbox1" type="checkbox" />
+      <input v-model="checked3" value="checkbox2" type="checkbox" />
+      <input v-model="checked3" value="checkbox3" type="checkbox" />
+      <!--다중 radio에 하나의 v-model data를 연결함으로써 다중 radio값을 관리할 수 있다.-->
+      <input v-model="picked" type="radio" value="radio1" />
+      <input v-model="picked" type="radio" value="radio2" />
+      <input v-model="picked" type="radio" value="radio3" />
+    </div>
+    <script>
+      const App = {
+        data() {
+          return {
+            msg: "Hello lec2",
+            msg2: "Hello textarea",
+            checked: false,
+            checked2: false,
+            checked3: [],
+            picked: "",
+          };
+        },
+        watch: {
+          checked2(newValue) {
+            console.log(newValue);
+          },
+          checked3(newValue) {
+            console.log(newValue);
+          },
+          picked(newValue) {
+            console.log(newValue);
+          },
+        },
+        methods: {
+          log() {
+            console.log(this.msg2);
+          },
+        },
+      };
+      const vm = Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
