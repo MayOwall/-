@@ -38,3 +38,20 @@ distribution의 약어이다.
 app.vue파일에서는 style태그를 통해 css를 작성할 수 있다.
 이때 style 태그 옆에 속성으로 lang="scss"를 추가 해 주면, scss 언어 또한 인식할 수 있게 된다.
 물론, sass package도 정상적으로 설치 된 상황이어야 한다.
+
+# lec 5 : SFC 프로젝트 구성 w. Webpack (1)
+
+
+### npm i
+
+npm i는 package이름 나열을 통해 한번에 여러개의 package를 설치할 수도 있다.
+`npm i -D webpack webpack-cli`
+
+### webpack-cli
+
+cli : command line interface의 약어
+터미널을 통해 webpack이 동작할 수 있도록 해 주는 package 
+
+#### webpack.config.js
+
+node.js환경에서 동작
