@@ -27,7 +27,6 @@ vs코드의 기본적인 정보들을 vscode라는 폴더에 저장을 해 놓�
 dev는 개발자 환경을 위한 명령어로, parcel의 진입점만 지정해 준다. 따라서 dev 명령어로 생성된 dist의 js 파일은 난독화가 되어 있지 않다.
 하지만 build는 build명령어를 추가해 줌으로써 실제로 사용자가 사용할 환경에서 사용될 js 파일을 컴파일 해준다. 이 js파일은 기존의 dev를 통해 생성된 js파일과는 달리 난독화 상태로 컴파일이 되기에 보다 용량을 줄여 사용할 수 있게 된다.
 
-
 ### dist 폴더
 
 distribution의 약어이다.
@@ -41,7 +40,6 @@ app.vue파일에서는 style태그를 통해 css를 작성할 수 있다.
 
 # lec 5 : SFC 프로젝트 구성 w. Webpack (1)
 
-
 ### npm i
 
 npm i는 package이름 나열을 통해 한번에 여러개의 package를 설치할 수도 있다.
@@ -50,8 +48,23 @@ npm i는 package이름 나열을 통해 한번에 여러개의 package를 설치
 ### webpack-cli
 
 cli : command line interface의 약어
-터미널을 통해 webpack이 동작할 수 있도록 해 주는 package 
+터미널을 통해 webpack이 동작할 수 있도록 해 주는 package
 
 #### webpack.config.js
 
 node.js환경에서 동작
+
+### Hot module replacement
+
+사랑해요 hot module replacement.
+코드를 수정하면 자동으로 브라우저에 반영되는 매우매우매우 편리한 기능.
+`webpack-dev-server`를 통해 사용할 수 있다.
+
+### webpack과 css
+
+webpack은 js언어만 이해할 수 있다. 따라서 CSS언어를 이해하기 위해선 따로 loader를 설치 해 주어야 한다.
+
+- `css-loader`
+- `vue-style-loader`
+
+로더를 설치 한 후에는 webpack.config.js에 연결 해 주는 과정이 필요하다.
