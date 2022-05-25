@@ -4,7 +4,9 @@ import Paragraph from "./components/Paragraph";
 import ConditionalRoop from "./components/ConditionalRoop";
 import Board from "./components/Board";
 import Counter from "./components/Counter";
-import { useState, useEffect } from "react";
+import Input from "./components/Input";
+import AutoCounter from "./components/AutoCounter";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   const name = "리액트";
@@ -58,6 +60,8 @@ function App() {
       document.removeEventListener("scroll", scrollLogger);
     };
   }, []);
+
+  const lec8InputRef = useRef();
 
   return (
     <div className="App">
@@ -124,6 +128,14 @@ function App() {
         >
           lec7 button
         </button>
+      </div>
+      <div className="lecture8">
+        <Input ref={lec8InputRef} />
+
+        <button onClick={() => lec8InputRef.current.focus()}>
+          input focus
+        </button>
+        <AutoCounter />
       </div>
     </div>
   );
