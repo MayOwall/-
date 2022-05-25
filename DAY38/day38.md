@@ -95,3 +95,61 @@ props는 객체 타입으로 선언하여 각 데이터의 타입을 지정 해 
     name : [String, Number  ]
   }
 ```
+
+## LEC 3 : 컴포넌트 Non-Prop 속성
+
+### 컴포넌트에 부여된 속성
+
+컴포넌트에 속성을 부여했을 때 컴포넌트의 하위 요소가 2개 이상이면 속성은 제대로 하위 컴포넌트에 상속되지 않는다.
+
+허나 각기 요소에 `$attrs`를 통해 부여를 해 주면 상속이 정상적으로 되는 것을 확인할 수 있다.
+
+```html
+<h1 :class="$attrs.class" :style="$attrs.style">Hello</h1>
+<h2 @click="$attrs.onClick">HAHA</h2>
+```
+
+### slot
+
+- 기본 컨텐츠 만들어 줄 수 있음 Fallback content
+- slot은 각기 이름을 만들어 줄 수도 있다. `v-slot`
+- `v-slot`은 `#`이라는 약어로 대신 사용할 수 있다.
+
+## 동적 컴포넌트
+
+필요에 따라 컴포넌트를 교체하여 사용할 수 있도록 하는 개념.
+
+- keep-alive
+
+## ref
+
+document.querySelector에서 해방 해 주는 아주 착한 친구
+
+컴포넌트 단위 내부에서 ref를 기준으로 요소를 찾을 수 있게 해 준다.
+
+```html
+<template>
+  <h1 ref="hello">hello~</h1>
+</template>
+```
+
+```js
+export default {
+  mounted {
+    const h1El = this.$refs.hello;
+    console.log(h1El.innerText); // hello~
+  }
+}
+```
+
+ref는 컴포넌트 단위에서도 사용 가능하다.
+
+```html
+<template>
+  <Hello ref="hello" />
+</template>
+
+<script>
+
+<script>
+```
