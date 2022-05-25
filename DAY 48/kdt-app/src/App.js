@@ -3,6 +3,8 @@ import Logo from "./components/Logo";
 import Paragraph from "./components/Paragraph";
 import ConditionalRoop from "./components/ConditionalRoop";
 import Board from "./components/Board";
+import Counter from "./components/Counter";
+import { useState } from "react";
 
 function App() {
   const name = "리액트";
@@ -41,6 +43,7 @@ function App() {
       author: "mayOwall",
     },
   ];
+  let [totalCount, setTotalCount] = useState(0);
 
   return (
     <div className="App">
@@ -71,6 +74,24 @@ function App() {
           <span key={item}>{item}</span>
         ))}
       </header>
+      <div className="lecture6">
+        <h3>lecture6</h3>
+        <h4>Total Count : {totalCount}</h4>
+        <Counter
+          onChange={(data) => {
+            setTotalCount(totalCount + data);
+          }}
+        />
+        <Counter onChange={(data) => {
+            setTotalCount(totalCount + data);
+          }}/>
+        <Counter onChange={(data) => {
+            setTotalCount(totalCount + data);
+          }}/>
+        <Counter onChange={(data) => {
+            setTotalCount(totalCount + data);
+          }}/>
+      </div>
     </div>
   );
 }
