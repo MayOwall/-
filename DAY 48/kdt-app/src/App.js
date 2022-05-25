@@ -4,7 +4,7 @@ import Paragraph from "./components/Paragraph";
 import ConditionalRoop from "./components/ConditionalRoop";
 import Board from "./components/Board";
 import Counter from "./components/Counter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const name = "리액트";
@@ -44,6 +44,20 @@ function App() {
     },
   ];
   let [totalCount, setTotalCount] = useState(0);
+  const [lec7Count, setLec7Count] = useState(0);
+  useEffect(() => {
+    console.log(lec7Count);
+  }, [lec7Count]);
+  useEffect(() => {
+    console.log("component is loaded");
+    const scrollLogger = () => {
+      console.log(window.scrollY);
+    };
+    window.addEventListener("scroll", scrollLogger);
+    return () => {
+      document.removeEventListener("scroll", scrollLogger);
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -82,15 +96,34 @@ function App() {
             setTotalCount(totalCount + data);
           }}
         />
-        <Counter onChange={(data) => {
+        <Counter
+          onChange={(data) => {
             setTotalCount(totalCount + data);
-          }}/>
-        <Counter onChange={(data) => {
+          }}
+        />
+        <Counter
+          onChange={(data) => {
             setTotalCount(totalCount + data);
-          }}/>
-        <Counter onChange={(data) => {
+          }}
+        />
+        <Counter
+          onChange={(data) => {
             setTotalCount(totalCount + data);
-          }}/>
+          }}
+        />
+      </div>
+      <div className="lecture7">
+        <h3>lecture7</h3>
+        <div>
+          You clicked lec7 button for "<b>{lec7Count}</b>" times
+        </div>
+        <button
+          onClick={() => {
+            setLec7Count(lec7Count + 1);
+          }}
+        >
+          lec7 button
+        </button>
       </div>
     </div>
   );
