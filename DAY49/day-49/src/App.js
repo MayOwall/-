@@ -5,6 +5,7 @@ import Lec3Box from "./components/Lec3Box";
 import { useState, useCallback } from "react";
 import Lec4CheckBox from "./components/Lec4CheckBox";
 import useToggle from "./hooks/useToggle";
+import useHover from "./hooks/useHover";
 
 function App() {
   const [lec2Label, setLec2Label] = useState("result");
@@ -22,6 +23,7 @@ function App() {
     setLec4OnionOn(e.target.checked);
   }, []);
   const [lec5On, lec5Toggle] = useToggle();
+  const [lec5Ref, lec5isHover] = useHover();
 
   return (
     <div className="App">
@@ -57,6 +59,8 @@ function App() {
       </div>
       <div className="lec5">
         <button onClick={lec5Toggle}>{lec5On ? "true" : "false "}</button>
+        {lec5isHover ? "hover" : "out"}
+        <Lec1Box ref={lec5Ref} />
       </div>
     </div>
   );
