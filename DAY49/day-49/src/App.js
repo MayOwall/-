@@ -6,7 +6,7 @@ import { useState, useCallback } from "react";
 import Lec4CheckBox from "./components/Lec4CheckBox";
 import useToggle from "./hooks/useToggle";
 import useHover from "./hooks/useHover";
-
+import Lec6Counter from "./components/Lec6Counter";
 function App() {
   const [lec2Label, setLec2Label] = useState("result");
   const [lec3Count, setLec3Count] = useState(0);
@@ -61,6 +61,9 @@ function App() {
         <button onClick={lec5Toggle}>{lec5On ? "true" : "false "}</button>
         {lec5isHover ? "hover" : "out"}
         <Lec1Box ref={lec5Ref} />
+      </div>
+      <div className="lec6">
+        <Lec6Counter />
       </div>
     </div>
   );
